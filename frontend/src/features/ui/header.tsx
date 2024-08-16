@@ -35,9 +35,7 @@ export default function Header() {
         to="/"
       >
         <Logo className="w-[40px] h-[40px]" />
-        <h1 className="font-sans-accent text-center">
-          Template
-        </h1>
+        <h1 className="font-sans-accent text-center">Template</h1>
       </Link>
       <Offcanvas>
         <NavigationMenu className="w-full flex flex-col justify-center h-full px-8 max-w-none">
@@ -55,7 +53,7 @@ export default function Header() {
       </Offcanvas>
       <div className="hidden md:flex md:items-stretch content-center justify-items-center md:justify-center w-full lg:w-auto">
         <NavigationMenu className="flex gap-6 h-100 items-center justify-center h-full list-none">
-          <ul className="flex gap-2 items-center">
+          <ul className="flex gap-2 items-center justify-center">
             <PageLinks />
             <LoginLinks />
           </ul>
@@ -76,7 +74,10 @@ function LoginLinks() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="p-0">
-              <UserProfileAvatar names={user.names} className="text-lg size-10" />
+              <UserProfileAvatar
+                user={user}
+                className="text-lg size-10"
+              />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
@@ -100,14 +101,9 @@ function LoginLinks() {
           className="w-full flex items-center"
         >
           <NavLink to={"/sign-in"}>
-            <NavigationMenuLink
-              className={`${cn(
-                navigationMenuTriggerStyle(),
-                "bg-blue-500 text-white hover:bg-blue-600 hover:text-white w-full md:w-max text-lg h-auto"
-              )}`}
-            >
+            <Button className="w-full md:w-max test-lg h-auto">
               Iniciar sesión
-            </NavigationMenuLink>
+            </Button>
           </NavLink>
         </NavigationMenuItem>
       )}
@@ -121,7 +117,7 @@ function PageLinks() {
     <>
       {TABS.map((tab) => {
         const className = cn({
-          "bg-blue-600 text-slate-100": activeLink === tab,
+          "bg-background text-foreground": activeLink === tab,
           "text-gray-800": activeLink !== tab,
         });
         return (

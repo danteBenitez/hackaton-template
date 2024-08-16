@@ -1,5 +1,4 @@
 import signInBg from "@/assets/img/sign-in-bg.jpg";
-import { Logo } from "@/components/svg/logo";
 import SignIn from "@/features/auth/components/sign-in";
 import useAuth from "@/features/auth/hooks/use-auth";
 import FullScreenSpinner from "@/features/ui/fullscreen-spinner";
@@ -19,10 +18,11 @@ export default function SignInPage() {
           {/* TODO: Maybe limit the image's width or height to prevent a blurry effect */}
           <img src={signInBg} className="object-contain xl:min-w-[734px]" />
         </section>
-        <section className="flex bg-white flex-col justify-center gap-3 p-4 py-2 text-lg xl:w-2/3 md:px-10 w-full max-h-min">
+        <section className="flex bg-background flex-col justify-center gap-3 p-4 py-2 text-lg xl:w-2/3 md:px-10 w-full max-h-min">
           <Link to="/" className="flex items-center max-w-4xl">
-            <Logo className="h-24 aspect-square" />
-            <h1 className="font-sans-accent text-7xl text-blue-700">PlaSeC</h1>
+            <h1 className="font-sans-accent text-7xl text-foreground">
+              Template
+            </h1>
           </Link>
           <SignIn />
         </section>

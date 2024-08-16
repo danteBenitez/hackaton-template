@@ -38,11 +38,11 @@ export default function UserList(props: { users: User[] }) {
           return (
             <TableRow key={user.user_id}>
               <TableCell className="font-medium flex items-center">
-                <UserProfileAvatar names={user.names} />
+                <UserProfileAvatar user={user} />
                 <span className="ml-2">{user.username}</span>
               </TableCell>
               <TableCell>
-                {user.surnames}, {user.names}
+                {user.username}
               </TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell className="flex gap-2">

@@ -24,7 +24,7 @@ export default function Offcanvas(props: { children: ReactNode }) {
       </NavigationMenu>
       <div
         className={cn(
-          "fixed top-0 right-0 w-screen h-screen bg-white z-[101] flex flex-col",
+          "fixed top-0 right-0 w-screen h-screen bg-background z-[101] flex flex-col",
           className
         )}
       >

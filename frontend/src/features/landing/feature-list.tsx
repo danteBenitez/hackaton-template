@@ -67,7 +67,7 @@ function FeatureCard(props: {
       ) : (
         <DestinationFeature className="h-full min-h-64 lg:h-[80%]" />
       )}
-      <article className="border bg-white transition-colors hover:bg-blue-600 hover:text-white px-8 py-10 max-w-2xl max-h-3xl rounded-md hover:shadow-md">
+      <article className="border bg-white transition-colors hover:bg-background hover:text-foreground px-8 py-10 max-w-2xl max-h-3xl rounded-md hover:shadow-md">
         <h3 className="font-sans-accent text-2xl lg:text-4xl mb-2">
           {props.heading ?? "Feature"}
         </h3>

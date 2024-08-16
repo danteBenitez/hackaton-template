@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 
 const FOOTER_LINKS = [
   {
-    icon: <InstagramIcon className="w-6 fill-white" />,
+    icon: <InstagramIcon className="w-6 fill-foreground" />,
     to: "https://www.instagram.com/example/",
     text: "PlaSeC",
   },
   {
-    icon: <FacebookIcon className="w-6 fill-white" />,
+    icon: <FacebookIcon className="w-6 fill-foreground" />,
     to: "https://www.facebook.com/example/",
     text: "PlaSeC",
   },
@@ -18,14 +18,14 @@ const FOOTER_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-blue-600 text-white flex flex-col gap-4 mt-24">
+    <footer className="bg-background text-foreground flex flex-col gap-4 mt-24">
       <div className="flex justify-between flex-wrap mx-auto content-center w-full lg:max-w-[70%] gap-2 md:gap-12">
         <div className="min-h-[30vh]">
           <Link
             className="flex gap-2 text-[5rem] items-center flex-1 justify-center lg:justify-start p-2 md:p-5"
             to="/"
           >
-            <WhiteLogo className="w-[80px] h-[80px] fill-white stroke-white" />
+            <WhiteLogo className="w-[80px] h-[80px] fill-background stroke-foreground" />
             <span className="font-sans-accent text-center">Template</span>
           </Link>
           <div className="px-5 flex flex-col gap-2 items-start mt-4 md:mt-8">
@@ -81,7 +81,7 @@ export default function Footer() {
 
 function FooterLink(props: { children?: React.ReactNode; to: string }) {
   return (
-    <Link to={props.to} className="flex gap-3 text-white">
+    <Link to={props.to} className="flex gap-3 text-foreground">
       {props.children}
     </Link>
   );

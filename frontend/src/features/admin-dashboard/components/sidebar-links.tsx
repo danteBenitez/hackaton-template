@@ -26,7 +26,7 @@ export default function SidebarLinks() {
   return LINKS.map((linkSection) => {
     if (linkSection.link && !linkSection.links) {
       const activeClassnames = cn({
-        "*:text-blue-600 *:fill-blue-600": linkSection.link === currentPath,
+        "*:text-orange-600 *:fill-blue-600": linkSection.link === currentPath,
       });
       return (
         <Link

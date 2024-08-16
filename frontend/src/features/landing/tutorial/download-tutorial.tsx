@@ -79,7 +79,7 @@ export default function DownloadTutorial() {
         ¿Cómo descargar la aplicación?
       </HeadingTitle>
       <a
-        className="bg-blue-600 transition-colors duration-200 hover:bg-blue-700 px-5 py-3 text-white max-w-fit flex rounded-md items-center gap-2 font-sans-accent cursor-pointer mb-3"
+        className="bg-background transition-colors duration-200 hover:bg-background px-5 py-3 text-foreground max-w-fit flex rounded-md items-center gap-2 font-sans-accent cursor-pointer mb-3"
         href=""
       >
         <DownloadIcon />
@@ -125,7 +125,7 @@ function Step(props: {
       <Card className="shadow-md min-w-full lg:max-w-[40%] lg:min-w-[510px] min-h-32 w-full lg:w-auto mt-4">
         <CardHeader>
           <CardTitle className="flex items-center gap-4">
-            <div className="group relative rounded-full w-10 aspect-square bg-blue-600 flex items-center justify-center text-white">
+            <div className="group relative rounded-full w-10 aspect-square bg-background flex items-center justify-center text-foreground">
               <span className="z-10">{props.number}</span>
             </div>
             {props.title}
