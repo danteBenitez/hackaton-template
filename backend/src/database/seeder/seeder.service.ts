@@ -4,14 +4,15 @@ import { ENVIRONMENT } from '@/config/env';
 import { User } from '@/users/entities/user.entity';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { EntityManager } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import * as fs from "node:fs/promises";
+import { EntityManager } from 'typeorm';
 
 @Injectable()
 export class SeederService {
   constructor(
     private entityManager: EntityManager,
-    private configService: ConfigService
+    private configService: ConfigService,
   ) { }
 
   /**
@@ -20,6 +21,7 @@ export class SeederService {
   async seed() {
     await this.seedRoles();
     await this.seedDefaultAdmin();
+    await this.seedUsers();
   }
 
   get saltRounds(): number {
@@ -29,6 +31,22 @@ export class SeederService {
       return 10;
     }
     return parseInt(saltRounds);
+  }
+
+  async seedUsers() {
+    const contents = await fs.readFile('src/database/seeder/mock/users.json', 'utf8');
+    const users = JSON.parse(contents);
+    const userRepository = this.entityManager.getRepository(User);
+    const userRole = await userRepository.findOne({
+      where: { name: ROLES.USER },
+    });
+    for (const user of users) {
+      await userRepository.insert({
+        ...user,
+        roles: [userRole],
+      });
+    }
+
   }
 
   async seedDefaultAdmin() {
