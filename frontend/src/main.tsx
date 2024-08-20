@@ -44,11 +44,6 @@ const router = createBrowserRouter([
       { path: "/dashboard/users", element: <UserListPage /> },
       { path: "/dashboard/users/:userId", element: <UserDetailPage /> },
       {
-        path: "/dashboard/",
-        index: true,
-        element: <Navigate to="/dashboard/users" />,
-      },
-      {
         path: "/dashboard/moderation/incidents",
         element: <ConstructionPage />,
       },
