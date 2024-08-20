@@ -6,6 +6,7 @@ import { getConnectionOptions } from '../config';
 import { ENVIRONMENT } from '@/config/env';
 import configEnv from '@/config/env';
 import { Role } from '@/auth/entities/role.entity';
+import { User } from '@/users/entities/user.entity';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { Role } from '@/auth/entities/role.entity';
         }
         return {
           ...getConnectionOptions(dbConfig),
-          entities: [Role]
+          entities: [Role, User]
         };
       },
       inject: [ConfigService],
