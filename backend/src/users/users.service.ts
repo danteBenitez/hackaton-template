@@ -1,13 +1,13 @@
+import { ROLES, ROLE_NAMES } from '@/auth/consts';
+import { Role } from '@/auth/entities/role.entity';
+import { ENVIRONMENT } from '@/config/env';
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
-import * as bcrypt from 'bcrypt';
-import { ConfigService } from '@nestjs/config';
-import { ENVIRONMENT } from '@/config/env';
-import { Role } from '@/auth/entities/role.entity';
-import { ROLES } from '@/auth/consts';
+import { User } from './entities/user.entity';
 
 /**
  * Service responsible for handling user-related operations.
@@ -85,6 +85,47 @@ export class UsersService {
     });
   }
 
+  async findAll(options?: {
+    query?: string;
+    filter?: {
+      role: (typeof ROLE_NAMES)[number];
+    };
+    orderBy?: 'createdAt' | 'username';
+  }): Promise<User[]> {
+    const query = this.usersRepository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.roles', 'roles');
+
+    if (options?.query) {
+      query.andWhere(
+        `(
+          user.username LIKE :query OR
+          user.names LIKE :query OR
+          user.surnames LIKE :query
+        )`,
+        { query: `${options.query}` },
+      );
+    }
+
+    if (options?.filter && options.filter.role) {
+      query.andWhere(`
+        :role IN (
+            SELECT roles.name FROM user_roles JOIN roles ON user_roles.role_id = roles.role_id 
+            WHERE user_roles.user_id = "user".user_id
+         )
+      `, { role: options.filter.role });
+    }
+
+    if (options?.orderBy && options.orderBy == 'createdAt') {
+      query.orderBy('user.created_at', 'DESC');
+    } else if (options?.orderBy && options.orderBy == 'username') {
+      query.orderBy('username', 'ASC');
+    }
+
+    const users = await query.getMany();
+    return users;
+  }
+
   async comparePassword(password: string, hash: string): Promise<boolean> {
     return bcrypt.compare(password, hash);
   }
@@ -110,9 +151,14 @@ export class UsersService {
     return found;
   }
 
-  async findAll(): Promise<User[]> {
-    return this.usersRepository.find({
-      relations: ['roles']
-    });
+
+  async assignRole(user: User, roles: Role[]) {
+    user.roles = roles;
+    await this.usersRepository.save(user);
+  }
+
+  async removeRole(user: User, role: Role) {
+    user.roles = user.roles.filter((r) => r.name !== role.name);
+    await this.usersRepository.save(user);
   }
 }

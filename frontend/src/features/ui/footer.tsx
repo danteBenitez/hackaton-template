@@ -1,3 +1,4 @@
+import { Button } from "@/components/shadcn/ui/button";
 import FacebookIcon from "@/components/svg/icons/facebook";
 import InstagramIcon from "@/components/svg/icons/instagram";
 import { WhiteLogo } from "@/components/svg/logo";
@@ -32,11 +33,8 @@ export default function Footer() {
             <p className="text-2xl font-regular font-sans-accent text-center md:text-start">
               Slogan
             </p>
-            <Link
-              to="/sign-in"
-              className="text-blue-600 hover:bg-slate-200 px-4 py-2 bg-white rounded-md text-xl mx-auto md:mx-0 mt-1"
-            >
-              Call to Action
+            <Link to="/sign-in">
+              <Button>Call to Action</Button>
             </Link>
           </div>
         </div>

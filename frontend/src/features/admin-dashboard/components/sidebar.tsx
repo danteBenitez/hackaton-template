@@ -38,7 +38,7 @@ export default function Sidebar() {
         <Link to="/" className="flex items-center">
           <Logo className="h-10 aspect-square" />
           {expanded && (
-            <h1 className="font-sans-accent text-3xl text-blue-700">Template</h1>
+            <h1 className="font-sans-accent text-3xl text-foreground">Template</h1>
           )}
         </Link>
         <div className="cursor-pointer">

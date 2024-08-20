@@ -18,3 +18,21 @@ export async function signIn(params: SignInParams) {
 
     return response;
 }
+
+export type SignUpParams = {
+    username: string;
+    email: string;
+    password: string;
+    community_id?: string;
+}
+
+export type SignUpResponse = {
+    access_token: string;
+    user: User
+}
+
+export async function signUp(params: SignUpParams) {
+    const response = await api.post<SignUpResponse>("/auth/sign-up", params);
+
+    return response;
+}

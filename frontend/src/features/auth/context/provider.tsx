@@ -6,13 +6,16 @@ import { createContext, useCallback, useEffect } from "react";
 import { User } from "../interfaces/user";
 import {
   SignInParams,
+  SignUpParams,
   signIn as signInService,
+  signUp as signUpService
 } from "../services/auth";
 import { getUserProfile } from "@/features/profile/services/profile";
 // import { AxiosError } from "axios";
 
 type AuthContext = {
   signIn: (user: SignInParams) => Promise<void>;
+  signUp: (user: SignUpParams) => Promise<void>;
   signOut: () => void;
 } & {
   user: User | null;
@@ -63,6 +66,11 @@ export default function AuthProvider({
     setToken(response.data.access_token);
   };
 
+  const signUp = async (fields: SignUpParams) => {
+    const response = await signUpService(fields);
+    setToken(response.data.access_token);
+  }
+
   useEffect(() => {
     if (!token) {
       delete api.defaults.headers.Authorization;
@@ -90,6 +98,7 @@ export default function AuthProvider({
           signOut,
           loading,
           isAuthenticated,
+          signUp
         } as AuthContext
       }
     >

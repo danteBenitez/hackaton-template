@@ -11,7 +11,7 @@ export class User {
     @Column()
     name: string;
 
-    @Expose({ name: 'e-mail', toPlainOnly: true })
+    @Expose({ name: 'email', toPlainOnly: true })
     @Column()
     email: string;
 

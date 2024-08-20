@@ -14,11 +14,11 @@ const STEPS = [
     imageUrl: "/tutorial-steps/1.png",
     title: "Descarga la APK",
     description: (
-      <p className="py-2 text-slate-600 font-normal">
+      <p className="py-2 text-foreground font-normal">
         Descarga la aplicación haciendo{" "}
         <a
           href="/app.apk"
-          className="text-blue-500 underline"
+          className="text-foreground underline"
           download={"app.apk"}
         >
           click aquí

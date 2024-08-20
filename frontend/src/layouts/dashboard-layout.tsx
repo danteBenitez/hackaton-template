@@ -1,6 +1,5 @@
 import { Button } from "@/components/shadcn/ui/button";
 import Sidebar from "@/features/admin-dashboard/components/sidebar";
-import WelcomeBanner from "@/features/admin-dashboard/components/welcome-banner";
 import useAuth from "@/features/auth/hooks/use-auth";
 import FullScreenSpinner from "@/features/ui/fullscreen-spinner";
 import NotFoundPage from "@/pages/not_found";
@@ -28,9 +27,6 @@ export default function DashboardLayout() {
         <Sidebar />
       </div>
       <div className="w-full">
-        <div className="w-full">
-          <WelcomeBanner />
-        </div>
         <Outlet />
       </div>
     </div>
