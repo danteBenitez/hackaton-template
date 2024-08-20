@@ -10,7 +10,7 @@ export default function HeadingTitle(props: {
   return (
     <Tag
       className={cn(
-        "text-[3rem] text-center font-sans-accent text-blue-600",
+        "text-[3rem] text-center font-sans-accent text-foreground",
         props.className
       )}
     >

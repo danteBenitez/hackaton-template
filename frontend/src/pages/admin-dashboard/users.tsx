@@ -93,7 +93,6 @@ function FilterBar<T extends string[]>(props: FilterBarProps<T>) {
         <SelectContent>
           <SelectGroup>
             <SelectItem value={ROLES["ADMIN"]}>Administrador</SelectItem>
-            <SelectItem value={ROLES["AUTHORITY"]}>Autoridad</SelectItem>
             <SelectItem value={ROLES["USER"]}>Usuario</SelectItem>
           </SelectGroup>
         </SelectContent>

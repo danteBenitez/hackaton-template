@@ -31,11 +31,11 @@ export default function Header() {
   return (
     <header className="flex flex-wrap items-center justify-between border border-slate-200 px-2 md:px-4 py-2 text-4xl">
       <Link
-        className="flex gap-2 text-[2.5rem] items-center text-blue-600 flex-1 justify-center lg:justify-start"
+        className="flex gap-2 text-[2.5rem] items-center text-foreground flex-1 justify-center lg:justify-start"
         to="/"
       >
-        <Logo className="w-[40px] h-[40px]" />
-        <h1 className="font-sans-accent text-center">Template</h1>
+        <Logo className="w-[40px] h-[40px] text-primary" />
+        <h1 className="font-sans-accent text-center text-primary">Template</h1>
       </Link>
       <Offcanvas>
         <NavigationMenu className="w-full flex flex-col justify-center h-full px-8 max-w-none">
@@ -74,10 +74,7 @@ function LoginLinks() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="p-0">
-              <UserProfileAvatar
-                user={user}
-                className="text-lg size-10"
-              />
+              <UserProfileAvatar user={user} className="text-lg size-10" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
@@ -96,16 +93,31 @@ function LoginLinks() {
         </DropdownMenu>
       )}
       {!isAuthenticated && !loading && (
-        <NavigationMenuItem
-          key={"/sign-in"}
-          className="w-full flex items-center"
-        >
-          <NavLink to={"/sign-in"}>
-            <Button className="w-full md:w-max test-lg h-auto">
-              Iniciar sesión
-            </Button>
-          </NavLink>
-        </NavigationMenuItem>
+        <>
+          <NavigationMenuItem
+            key={"/sign-up"}
+            className="w-full flex items-center"
+          >
+            <NavLink to={"/auth/sign-up"}>
+              <Button
+                className="w-full md:w-max text-lg h-auto"
+                variant={"secondary"}
+              >
+                Registrarse
+              </Button>
+            </NavLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem
+            key={"/sign-in"}
+            className="w-full flex items-center"
+          >
+            <NavLink to={"/auth/sign-in"}>
+              <Button className="w-full md:w-max text-lg h-auto">
+                Iniciar sesión
+              </Button>
+            </NavLink>
+          </NavigationMenuItem>
+        </>
       )}
     </>
   );
@@ -118,7 +130,7 @@ function PageLinks() {
       {TABS.map((tab) => {
         const className = cn({
           "bg-background text-foreground": activeLink === tab,
-          "text-gray-800": activeLink !== tab,
+          "text-foreground": activeLink !== tab,
         });
         return (
           <NavigationMenuItem key={tab.href}>

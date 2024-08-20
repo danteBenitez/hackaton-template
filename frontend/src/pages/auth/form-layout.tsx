@@ -1,10 +1,9 @@
 import signInBg from "@/assets/img/sign-in-bg.jpg";
-import SignIn from "@/features/auth/components/sign-in";
 import useAuth from "@/features/auth/hooks/use-auth";
 import FullScreenSpinner from "@/features/ui/fullscreen-spinner";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 
-export default function SignInPage() {
+export default function FormLayout() {
   const { loading, isAuthenticated } = useAuth();
   
   if (loading) return <FullScreenSpinner />;
@@ -24,7 +23,7 @@ export default function SignInPage() {
               Template
             </h1>
           </Link>
-          <SignIn />
+          <Outlet />
         </section>
       </div>
     </main>

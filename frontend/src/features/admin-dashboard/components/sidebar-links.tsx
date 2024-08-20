@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Ban, Users } from "lucide-react";
+import { Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import SectionLink from "./section-link";
 import SidebarItem from "./sidebar-item";
@@ -9,24 +9,17 @@ const LINKS = [
     section: "Usuarios y roles",
     icon: <Users className="h-6 w-6" />,
     link: "/dashboard/users",
-  },
-  {
-    section: "Moderación",
-    icon: <Ban className="h-6 w-6" />,
-    links: [
-      { text: "Incidencias", href: "/dashboard/moderation/incidents" },
-      { text: "Publicaciones", href: "/dashboard/moderation/posts" },
-    ],
-  },
+  }
 ];
 
 export default function SidebarLinks() {
   const currentPath = window.location.pathname;
 
   return LINKS.map((linkSection) => {
+    // @ts-expect-error Later we can add a `links` prop
     if (linkSection.link && !linkSection.links) {
       const activeClassnames = cn({
-        "*:text-orange-600 *:fill-blue-600": linkSection.link === currentPath,
+        "*:text-foreground *:fill-blue-600": linkSection.link === currentPath,
       });
       return (
         <Link
