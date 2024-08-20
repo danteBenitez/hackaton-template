@@ -52,6 +52,7 @@ export class UsersController {
         @Body() rolesDto: AssignRolesDto,
         @Param('user_id') user_id: string,
     ) {
+        console.log(rolesDto);
         const roles: string[] = rolesDto.roles;
         const foundRoles = await this.roleRepository.find({
             where: roles.map((role) => ({ name: role })),
@@ -73,6 +74,7 @@ export class UsersController {
         @Param('user_id') user_id: string,
     ) {
         const role = roleDto.role_name;
+        console.log(roleDto);
         const roleEntity = await this.roleRepository.findOne({
             where: { name: role },
         });

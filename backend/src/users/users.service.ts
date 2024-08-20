@@ -30,8 +30,13 @@ export class UsersService {
     return parseInt(saltRounds);
   }
 
-  get defaultRole(): Role {
-    return this.roleRepository.create({ name: ROLES.USER });
+  async defaultRole(): Promise<Role> {
+    const role = await this.roleRepository.findOne({ where: { name: ROLES.USER } });
+    if (!role) {
+      console.warn("Role de usuario no encontrado. Asegúrese de que la base de datos se haya inicializado correctamente.");
+      throw new NotFoundException("Role not found");
+    }
+    return role;
   }
 
   async create(user: CreateUserDto) {
@@ -45,7 +50,7 @@ export class UsersService {
 
     const userInstance = this.usersRepository.create({
       ...user,
-      roles: [this.defaultRole],
+      roles: [await this.defaultRole()],
     });
     userInstance.password = await bcrypt.hash(user.password, this.saltRounds);
     await this.usersRepository.save(userInstance);
