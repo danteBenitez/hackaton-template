@@ -46,6 +46,10 @@ export default function SignIn() {
     } catch (err) {
       const error = err as AxiosError;
       console.log(error.code);
+      if (error.response?.status === 404) {
+        setErrorMessage("Credenciales inválidas");
+      }
+      
       if (error.code === "ERR_NETWORK") {
         setErrorMessage("Error de conexión, intente nuevamente más tarde.");
       }
@@ -91,7 +95,7 @@ export default function SignIn() {
               </FormItem>
             )}
           />
-         <Button disabled={isSubmitting} className="border-none mt-5 w-full">Iniciar Sesión</Button>
+         <Button disabled={isSubmitting} className="bg-blue-600 hover:bg-blue-700 text-white mt-5 w-full">Iniciar Sesión</Button>
         </form>
       </Form>
     </div>
