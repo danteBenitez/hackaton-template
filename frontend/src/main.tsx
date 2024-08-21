@@ -19,6 +19,7 @@ import ConstructionPage from "./pages/construction";
 import NotFoundPage from "./pages/not_found";
 import FormLayout from "./pages/auth/form-layout";
 import SignUp from "./features/auth/components/sign-up";
+import DashboardIndex from "./pages/admin-dashboard";
 
 const router = createBrowserRouter([
   {
@@ -40,19 +41,20 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/auth/sign-in",
-        element: <SignIn />
+        element: <SignIn />,
       },
       {
         path: "/auth/sign-up",
-        element: <SignUp />
-      }
+        element: <SignUp />,
+      },
     ],
   },
   {
     path: "/dashboard",
     element: <DashboardLayout />,
     children: [
-      { path: "/dashboard/users", element: <UserListPage />, index: true },
+      { path: "/dashboard/", element: <DashboardIndex />, index: true },
+      { path: "/dashboard/users", element: <UserListPage /> },
       { path: "/dashboard/users/:userId", element: <UserDetailPage /> },
       {
         path: "*",
