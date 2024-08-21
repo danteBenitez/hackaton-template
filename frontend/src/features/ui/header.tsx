@@ -45,14 +45,14 @@ export default function Header() {
             </ul>
           </div>
           <div className="mt-auto w-full h-fit py-10">
-            <ul className="list-none flex flex-col gap-4">
+            <ul className="list-none flex flex-col">
               <LoginLinks />
             </ul>
           </div>
         </NavigationMenu>
       </Offcanvas>
       <div className="hidden md:flex md:items-stretch content-center justify-items-center md:justify-center w-full lg:w-auto">
-        <NavigationMenu className="flex gap-6 h-100 items-center justify-center h-full list-none">
+        <NavigationMenu className="flex gap-6 list-none">
           <ul className="flex gap-2 items-center justify-center">
             <PageLinks />
             <LoginLinks />
@@ -93,14 +93,14 @@ function LoginLinks() {
         </DropdownMenu>
       )}
       {!isAuthenticated && !loading && (
-        <>
+        <div className="flex gap-2 pb-3 ">
           <NavigationMenuItem
             key={"/sign-up"}
-            className="w-full flex items-center"
+            className=""
           >
             <NavLink to={"/auth/sign-up"}>
               <Button
-                className="w-full md:w-max text-lg h-auto"
+                className="w-full md:w-max text-lg"
                 variant={"secondary"}
               >
                 Registrarse
@@ -109,15 +109,15 @@ function LoginLinks() {
           </NavigationMenuItem>
           <NavigationMenuItem
             key={"/sign-in"}
-            className="w-full flex items-center"
+            className=""
           >
             <NavLink to={"/auth/sign-in"}>
-              <Button className="w-full md:w-max text-lg h-auto">
+              <Button className="w-full md:w-max text-lg">
                 Iniciar sesión
               </Button>
             </NavLink>
           </NavigationMenuItem>
-        </>
+        </div>
       )}
     </>
   );
@@ -139,7 +139,7 @@ function PageLinks() {
                 className={`${cn(
                   navigationMenuTriggerStyle(),
                   className,
-                  "w-full h-full md:w-max text-lg flex gap-2 items-center"
+                  "w-full md:w-max text-lg flex gap-2 items-center"
                 )}`}
               >
                 {<tab.icon />}
