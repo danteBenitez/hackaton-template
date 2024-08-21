@@ -104,9 +104,9 @@ export class UsersService {
     if (options?.query) {
       query.andWhere(
         `(
-          user.name LIKE :query OR
+          user.name LIKE :query
         )`,
-        { query: `${options.query}` },
+        { query: `%${options.query}%` },
       );
     }
 
