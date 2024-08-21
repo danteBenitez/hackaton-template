@@ -1,15 +1,20 @@
 import { cn } from "@/lib/utils";
-import { Users } from "lucide-react";
+import { Map, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import SectionLink from "./section-link";
 import SidebarItem from "./sidebar-item";
 
 const LINKS = [
   {
+    section: "Mapa",
+    icon: <Map className="h-6 w-6" />,
+    link: "/dashboard/map",
+  },
+  {
     section: "Usuarios y roles",
     icon: <Users className="h-6 w-6" />,
     link: "/dashboard/users",
-  }
+  },
 ];
 
 export default function SidebarLinks() {

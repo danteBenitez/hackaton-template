@@ -15,10 +15,11 @@ import UserListPage from "./pages/admin-dashboard/users";
 import SignIn from "@/features/auth/components/sign-in";
 // import SignUp from "@/features/auth/components/sign-up";
 
+import SignUp from "./features/auth/components/sign-up";
+import MapPage from "./pages/admin-dashboard/map";
+import FormLayout from "./pages/auth/form-layout";
 import ConstructionPage from "./pages/construction";
 import NotFoundPage from "./pages/not_found";
-import FormLayout from "./pages/auth/form-layout";
-import SignUp from "./features/auth/components/sign-up";
 
 const router = createBrowserRouter([
   {
@@ -40,12 +41,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/auth/sign-in",
-        element: <SignIn />
+        element: <SignIn />,
       },
       {
         path: "/auth/sign-up",
-        element: <SignUp />
-      }
+        element: <SignUp />,
+      },
     ],
   },
   {
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/dashboard/users", element: <UserListPage />, index: true },
       { path: "/dashboard/users/:userId", element: <UserDetailPage /> },
+      { path: "/dashboard/map", element: <MapPage /> },
       {
         path: "*",
         element: <NotFoundPage />,
