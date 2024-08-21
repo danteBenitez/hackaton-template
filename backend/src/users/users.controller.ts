@@ -9,10 +9,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Request } from 'express';
 import { Repository } from 'typeorm';
 import { AssignRolesDto } from './dto/assign-roles.dto';
+import { FindAllQueryDto } from './dto/find-all-query.dto';
 import { RemoveRoleDto } from './dto/remove-role.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
-import { FindAllQueryDto } from './dto/find-all-query.dto';
 
 @Controller('/users')
 @UseGuards(JwtAuthGuard)
@@ -36,6 +36,12 @@ export class UsersController {
             },
             orderBy: query.order_by
         });
+    }
+
+    @Role(ROLES.ADMIN)
+    @Get("/by-month")
+    async findByWeek() {
+        return this.usersService.findUserCountByMonth();
     }
 
     @Role(ROLES.ADMIN)
