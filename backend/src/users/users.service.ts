@@ -104,9 +104,7 @@ export class UsersService {
     if (options?.query) {
       query.andWhere(
         `(
-          user.username LIKE :query OR
-          user.names LIKE :query OR
-          user.surnames LIKE :query
+          user.name LIKE :query OR
         )`,
         { query: `${options.query}` },
       );
@@ -124,7 +122,7 @@ export class UsersService {
     if (options?.orderBy && options.orderBy == 'createdAt') {
       query.orderBy('user.created_at', 'DESC');
     } else if (options?.orderBy && options.orderBy == 'username') {
-      query.orderBy('username', 'ASC');
+      query.orderBy('user.name', 'ASC');
     }
 
     const users = await query.getMany();
