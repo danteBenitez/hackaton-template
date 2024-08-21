@@ -35,16 +35,19 @@ export class SeederService {
 
   async seedUsers() {
     const contents = await fs.readFile('src/database/seeder/mock/users.json', 'utf8');
-    const users = JSON.parse(contents);
+    const users = JSON.parse(contents) as User[];
+    const roleRepository = this.entityManager.getRepository(Role);
     const userRepository = this.entityManager.getRepository(User);
-    const userRole = await userRepository.findOne({
+    const userRole = await roleRepository.findOne({
       where: { name: ROLES.USER },
     });
+    if (!userRole) {
+      throw new Error('User role not found');
+    }
     for (const user of users) {
-      await userRepository.insert({
-        ...user,
-        roles: [userRole],
-      });
+      const userEntity = userRepository.create(user);
+      userEntity.roles = [userRole];
+      await userRepository.save(userEntity);
     }
 
   }
