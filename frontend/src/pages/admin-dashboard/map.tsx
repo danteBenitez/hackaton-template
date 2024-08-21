@@ -1,3 +1,4 @@
+import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet/dist/leaflet.css";
 import { useState } from "react";
 import {
@@ -28,7 +29,7 @@ export default function MapPage() {
       <MapContainer
         center={[-24.6545, -59.5011]}
         zoom={8}
-        className="h-[60rem]"
+        className="h-[48rem]"
       >
         <LayersControl>
           <LayersControl.BaseLayer name="Mapa 2D" checked>
