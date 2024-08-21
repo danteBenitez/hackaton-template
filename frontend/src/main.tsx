@@ -16,6 +16,7 @@ import SignIn from "@/features/auth/components/sign-in";
 // import SignUp from "@/features/auth/components/sign-up";
 
 import SignUp from "./features/auth/components/sign-up";
+import DashboardIndex from "./pages/admin-dashboard";
 import MapPage from "./pages/admin-dashboard/map";
 import FormLayout from "./pages/auth/form-layout";
 import ConstructionPage from "./pages/construction";
@@ -53,7 +54,8 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout />,
     children: [
-      { path: "/dashboard/users", element: <UserListPage />, index: true },
+      { path: "/dashboard/", element: <DashboardIndex />, index: true },
+      { path: "/dashboard/users", element: <UserListPage /> },
       { path: "/dashboard/users/:userId", element: <UserDetailPage /> },
       { path: "/dashboard/map", element: <MapPage /> },
       {
