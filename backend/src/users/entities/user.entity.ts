@@ -21,7 +21,7 @@ export class User {
 
     // A user can have only one role
     @ManyToMany(() => Role)
-    @JoinTable()
+    @JoinTable({ name: 'user_roles' })
     @Expose({ name: 'user_roles', toPlainOnly: true })
     roles: Role[];
 

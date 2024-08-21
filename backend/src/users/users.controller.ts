@@ -4,7 +4,7 @@ import { Role as RoleEntity } from '@/auth/entities/role.entity';
 import { JwtAuthGuard } from '@/auth/guards/auth.guard';
 import { RoleGuard } from '@/auth/guards/role.guard';
 import { ProjectsService } from '@/projects/projects.service';
-import { Body, Controller, Delete, Get, NotFoundException, Param, ParseUUIDPipe, Patch, Put, Req, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, ParseUUIDPipe, Patch, Put, Query, Req, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Request } from 'express';
 import { Repository } from 'typeorm';
@@ -12,6 +12,7 @@ import { AssignRolesDto } from './dto/assign-roles.dto';
 import { RemoveRoleDto } from './dto/remove-role.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
+import { FindAllQueryDto } from './dto/find-all-query.dto';
 
 @Controller('/users')
 @UseGuards(JwtAuthGuard)
@@ -25,8 +26,16 @@ export class UsersController {
 
     @Role(ROLES.ADMIN)
     @Get()
-    async findAll() {
-        return this.usersService.findAll();
+    async findAll(
+        @Query() query: FindAllQueryDto,
+    ) {
+        return this.usersService.findAll({
+            query: query.q,
+            filter: {
+                role: query.filter_role
+            },
+            orderBy: query.order_by
+        });
     }
 
     @Role(ROLES.ADMIN)
