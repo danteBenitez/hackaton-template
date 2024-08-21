@@ -2,7 +2,7 @@ import { Role } from "@/auth/entities/role.entity";
 import { Exclude, Expose } from "class-transformer";
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
-@Entity()
+@Entity('users')
 export class User {
     @PrimaryGeneratedColumn('uuid')
     user_id: string;
@@ -21,7 +21,11 @@ export class User {
 
     // A user can have only one role
     @ManyToMany(() => Role)
-    @JoinTable({ name: 'user_roles' })
+    @JoinTable({
+        name: 'user_roles',
+        joinColumn: { name: 'user_id', referencedColumnName: 'user_id' },
+        inverseJoinColumn: { name: 'role_id', referencedColumnName: 'role_id' }
+    })
     @Expose({ name: 'user_roles', toPlainOnly: true })
     roles: Role[];
 
